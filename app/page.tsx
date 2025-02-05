@@ -1,4 +1,5 @@
 import { SiteHeader } from "@/components/site-header"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { HeroSection } from "@/components/hero-section"
 import { InteractiveCards } from "@/components/interactive-cards"
 import { PricingSection } from "@/components/pricing-section"
