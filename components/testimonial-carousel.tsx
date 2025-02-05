@@ -15,31 +15,37 @@ const testimonials = [
     image: "/images/Hero1.png",
     type: "image",
     user: "@arch.design_studio_, con herramientas de RenderPro",
+    video: "",
   },
   {
     image: "/images/oficina.png",
     type: "image",
     user: "@arch.design_studio_, con herramientas de RenderPro",
+    video: "",
   },
   {
     image: "/images/cocina.png",
     type: "image",
     user: "@arch.design_studio_, con herramientas de RenderPro",
+    video: "",
   },
   {
     image: "/images/maqueta.png",
     type: "image",
     user: "@arch.design_studio_, con herramientas de RenderPro",
+    video: "",
   },
   {
     image: "/images/cocina2.png",
     type: "image",
     user: "@arch.design_studio_, con herramientas de RenderPro",
+    video: "",
   },
   {
     image: "/images/sala.png",
     type: "image",
     user: "@arch.design_studio_, con herramientas de RenderPro",
+    video: "",
   },
 ];
 
