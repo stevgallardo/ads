@@ -1,7 +1,7 @@
 "use client"
 
 import { SiteHeader } from "@/components/site-header";
-import { CourseHero } from "@/components/course-hero";
+//import { CourseHero } from "@/components/course-hero";
 import { PricingSection } from "@/components/pricing-section";
 import { CourseComparison } from "@/components/course-comparison";
 import { Loscursos } from "@/components/loscursos";

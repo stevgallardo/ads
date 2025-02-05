@@ -211,7 +211,6 @@ export default function RenderAdvancedPage() {
         <CourseContent
           modules={courseData.modules}
           contentImage={courseData.contentImage || "/images/pcrenderpro.png"}  // Pasa la imagen del contenido; se define en courseData o se usa default
-          features={courseData.features}
         />
 
         {/* Sección de DynamicCards (slider) */}
