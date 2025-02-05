@@ -63,7 +63,7 @@ export function CourseHero({ title, description, sessions, nextDate, heroImage, 
           <div className="mt-8 flex justify-center">
             <Button
               size="lg"
-              variant="primary"
+              variant="default"
               className="flex items-center gap-3 px-8 py-4 bg-blue-500 hover:bg-blue-800 text-white rounded-xl shadow-md transition"
               onClick={() => setVideoVisible(true)}
             >
