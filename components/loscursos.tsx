@@ -49,10 +49,12 @@ export function Loscursos() {
               <Image
                 src={card.image}
                 alt={card.title}
-                layout="fill"
+                width={800} // ✅ Ajustado para evitar problemas en móviles
+                height={600}
                 objectFit="cover"
-                className="absolute inset-0 rounded-xl"
+                className="w-full h-full rounded-xl"
                 priority
+                unoptimized // ✅ Previene errores en móviles
               />
 
               {/* Overlay con gradiente mejorado ✅ */}
