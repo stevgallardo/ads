@@ -1,26 +1,26 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { ChevronDown } from "lucide-react"
+import { useState } from "react";
+import { ChevronDown } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 
 interface Module {
-  title: string
-  lessons: string[]
+  title: string;
+  lessons: string[];
 }
 
 interface CourseContentProps {
-  modules: Module[]
-  contentImage: string  // NUEVA propiedad para la imagen del contenedor
+  modules: Module[];
+  contentImage: string; // NUEVA propiedad para la imagen del contenedor
 }
 
 export function CourseContent({ modules, contentImage }: CourseContentProps) {
-  const [openModule, setOpenModule] = useState<string>("0")
+  const [openModule, setOpenModule] = useState<string>("0");
 
   return (
     <section className="container py-16">
@@ -31,14 +31,14 @@ export function CourseContent({ modules, contentImage }: CourseContentProps) {
           <h2 className="mb-6 text-4xl font-bold">Contenido del curso</h2>
           <Accordion type="single" value={openModule} onValueChange={setOpenModule}>
             {modules.map((module, index) => (
-              <AccordionItem key={index} value={index.toString()}>
-                <AccordionTrigger className="text-left text-xl">
+              <AccordionItem key={index} value={index.toString()} className="border-t border-white/15">
+                <AccordionTrigger className="text-left text-xl py-4">
                   {module.title}
                 </AccordionTrigger>
                 <AccordionContent>
                   <ul className="ml-4 space-y-2">
                     {module.lessons.map((lesson, lessonIndex) => (
-                      <li key={lessonIndex} className="flex items-center gap-2 text-lg">
+                      <li key={lessonIndex} className="flex items-center gap-2 text-lg border-t border-white/10 py-2">
                         <ChevronDown className="h-5 w-5" />
                         {lesson}
                       </li>
@@ -62,5 +62,5 @@ export function CourseContent({ modules, contentImage }: CourseContentProps) {
         </div>
       </div>
     </section>
-  )
+  );
 }

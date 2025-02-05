@@ -66,15 +66,16 @@ export function TestimonialCarousel() {
               <CarouselItem key={index} className="flex justify-center">
                 <Card className="overflow-hidden rounded-lg bg-black/40 border border-white/10 backdrop-blur-lg transition-all duration-150 hover:shadow-[0_0_30px_rgba(125,211,252,0.15)]">
                   {item.type === "image" ? (
-                    <div className="relative h-[540px] flex items-center justify-center group transition-transform duration-150">
+                    <div className="relative w-full h-[420px] md:h-[540px] flex items-center justify-center group transition-transform duration-150">
                       <Image
                         src={item.image || "/placeholder.svg"}
                         alt={`Testimonial ${index + 1}`}
-                        width={960}
+                        width={960} // ✅ Tamaño adaptable
                         height={540}
-                        className="object-contain transition-all duration-150 grayscale group-hover:grayscale-0"
+                        className="w-full h-full object-cover rounded-lg transition-all duration-150 grayscale group-hover:grayscale-0"
+                        priority
                       />
-                      <div className="absolute inset-0 flex items-end justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-150">
+                      <div className="absolute inset-0 flex items-end justify-center opacity-100 md:opacity-0 group-hover:opacity-100 transition-opacity duration-150">
                         <div className="bg-gradient-to-t from-black/80 via-black/30 to-transparent text-white text-lg px-4 py-1 w-full text-center">
                           {item.user}
                         </div>
@@ -82,7 +83,7 @@ export function TestimonialCarousel() {
                     </div>
                   ) : (
                     <video
-                      className="h-[350px] w-full"
+                      className="h-[420px] md:h-[540px] w-full rounded-lg"
                       controls
                       poster="/placeholder.svg?height=400&width=600"
                     >

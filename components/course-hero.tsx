@@ -1,40 +1,46 @@
-"use client"
+"use client";
 
 import { useState } from "react";
+import Image from "next/image"; // ✅ Usamos Next.js Image para compatibilidad con Vercel
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Play } from "lucide-react";
+import { Play, X } from "lucide-react";
 
 interface CourseHeroProps {
   title: string;
   description: string;
   sessions: string;
   nextDate: string;
-  heroImage: string;  // NUEVA propiedad para la imagen de fondo
-  videoLink: string;  // NUEVA propiedad para el enlace del video
+  heroImage: string; // Imagen de fondo
+  videoLink: string; // Enlace del video
 }
 
-export function CourseHero({ title, description, sessions, nextDate, heroImage, videoLink }: CourseHeroProps) {
+export function CourseHero({
+  title,
+  description,
+  sessions,
+  nextDate,
+  heroImage,
+  videoLink,
+}: CourseHeroProps) {
   const [videoVisible, setVideoVisible] = useState(false);
 
-  // Función para cerrar el modal al hacer clic fuera del contenedor del video.
+  // Función para cerrar el modal al hacer clic fuera del video
   const handleModalClick = () => {
     setVideoVisible(false);
   };
 
   return (
     <section className="relative py-24 w-full">
-      {/* Contenedor de imagen de fondo */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Aquí se usa la propiedad heroImage para el fondo */}
-        <div
-          className="absolute inset-0 rounded-xl transition-opacity duration-300"
-          style={{
-            backgroundImage: `url(${heroImage})`,
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-          }}
+      {/* Contenedor de imagen de fondo ✅ Usamos Next.js Image */}
+      <div className="absolute inset-0 -z-10">
+        <Image
+          src={heroImage}
+          alt="Fondo del curso"
+          layout="fill"
+          objectFit="cover"
+          priority
+          className="rounded-xl"
         />
         {/* Gradiente superpuesto */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background rounded-xl" />
@@ -46,19 +52,14 @@ export function CourseHero({ title, description, sessions, nextDate, heroImage, 
           <h1 className="mb-6 text-5xl font-bold text-white">{title}</h1>
           <p className="mb-8 text-xl text-white">{description}</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <Badge 
-              variant="secondary" 
-              className="text-lg bg-[rgba(5,24,46,0.9)] text-white px-3 py-1 rounded"
-            >
+            <Badge className="text-lg bg-[rgba(5,24,46,0.9)] text-white px-3 py-1 rounded">
               {sessions}
             </Badge>
-            <Badge 
-              variant="secondary" 
-              className="text-lg bg-[rgba(5,24,46,0.9)] text-white px-3 py-1 rounded"
-            >
+            <Badge className="text-lg bg-[rgba(5,24,46,0.9)] text-white px-3 py-1 rounded">
               PRÓXIMA FECHA: {nextDate}
             </Badge>
           </div>
+
           {/* Botón "VER VIDEO" con icono de reproducción */}
           <div className="mt-8 flex justify-center">
             <Button
@@ -74,10 +75,10 @@ export function CourseHero({ title, description, sessions, nextDate, heroImage, 
         </div>
       </div>
 
-      {/* Modal de video */}
+      {/* Modal de video con dimensiones verticales corregidas ✅ */}
       {videoVisible && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
           onClick={handleModalClick}
         >
           <div
@@ -93,11 +94,13 @@ export function CourseHero({ title, description, sessions, nextDate, heroImage, 
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
             ></iframe>
+
+            {/* Botón de cierre con diseño mejorado ✅ */}
             <button
-              className="absolute top-2 right-2 text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition"
+              className="absolute top-3 right-3 text-white bg-gray-800 rounded-full p-2 hover:bg-gray-700 transition"
               onClick={() => setVideoVisible(false)}
             >
-              Cerrar
+              <X className="h-6 w-6" />
             </button>
           </div>
         </div>
