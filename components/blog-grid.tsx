@@ -29,7 +29,7 @@ const blogPosts = [
   {
     title: "Guía Rápida de Marketing",
     excerpt: "Descubre estrategias efectivas de marketing para potenciar tus renders.",
-    image: "/images/ventas2.jpg", // ruta de la imagen para la guía de marketing
+    image: "/images/ventas.jpg", // ruta de la imagen para la guía de marketing
     category: "Guía",
     date: "Proximamente",
     readTime: "pdf",

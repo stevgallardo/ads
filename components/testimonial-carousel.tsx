@@ -12,7 +12,7 @@ import {
 
 const testimonials = [
   {
-    image: "/images/Hero1.png",
+    image: "/images/hero1.png",
     type: "image",
     user: "@arch.design_studio_, con herramientas de RenderPro",
     video: "",

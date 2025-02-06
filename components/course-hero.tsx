@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image"; // ✅ Usamos Next.js Image para compatibilidad con Vercel
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Play, X } from "lucide-react";
@@ -11,8 +11,8 @@ interface CourseHeroProps {
   description: string;
   sessions: string;
   nextDate: string;
-  heroImage: string; // Imagen de fondo
-  videoLink: string; // Enlace del video
+  heroImage: string;
+  videoLink: string;
 }
 
 export function CourseHero({
@@ -31,26 +31,29 @@ export function CourseHero({
   };
 
   return (
-    <section className="relative py-24 w-full">
-      {/* Contenedor de imagen de fondo ✅ Usamos Next.js Image */}
-      <div className="absolute inset-0 -z-10">
+    <section className="relative py-24 w-full overflow-hidden">
+      {/* Contenedor de imagen de fondo con corrección de ancho */}
+      <div className="absolute inset-0 -z-10 w-full h-full">
         <Image
           src={heroImage}
           alt="Fondo del curso"
           layout="fill"
           objectFit="cover"
           priority
-          className="rounded-xl"
+          className="w-full h-full"
         />
         {/* Gradiente superpuesto */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background rounded-xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/50 to-background" />
       </div>
 
-      {/* Contenido principal centrado */}
+      {/* Contenido principal centrado y corregido */}
       <div className="relative z-10 w-full pt-16">
-        <div className="mx-auto max-w-3xl text-center">
-          <h1 className="mb-6 text-5xl font-bold text-white">{title}</h1>
-          <p className="mb-8 text-xl text-white">{description}</p>
+        <div className="mx-auto max-w-[90%] md:max-w-3xl text-center">
+          {/* Corrección del tamaño del título en móviles */}
+          <h1 className="mb-6 text-4xl md:text-5xl font-bold text-white break-words text-wrap">
+            {title}
+          </h1>
+          <p className="mb-8 text-lg md:text-xl text-white">{description}</p>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <Badge className="text-lg bg-[rgba(5,24,46,0.9)] text-white px-3 py-1 rounded">
               {sessions}
@@ -75,7 +78,7 @@ export function CourseHero({
         </div>
       </div>
 
-      {/* Modal de video con dimensiones verticales corregidas ✅ */}
+      {/* Modal de video con dimensiones corregidas ✅ */}
       {videoVisible && (
         <div
           className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"

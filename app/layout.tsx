@@ -1,6 +1,7 @@
 import { Poppins } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react"
 import "./globals.css";
 
 const poppins = Poppins({
@@ -32,6 +33,7 @@ export default function RootLayout({
         >
           {/* SpeedInsights para optimización de rendimiento */}
           <SpeedInsights />
+          <Analytics/>
 
           {/* Content Wrapper */}
           <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-4">

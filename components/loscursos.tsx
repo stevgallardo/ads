@@ -60,7 +60,7 @@ export function Loscursos() {
 
               {/* Contenido de la tarjeta */}
               <div className="absolute inset-0 p-6 flex flex-col justify-end z-10">
-                <h3 className="text-4xl font-bold text-white mb-2">
+                <h3 className="text-4xl md:text-3xl font-bold text-white mb-2 text-shadow-md break-words">
                   {card.title}
                 </h3>
 

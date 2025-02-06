@@ -10,7 +10,7 @@ export function Footer() {
           El uso de 'group' en el footer y 'group-hover:opacity-20' permite que al pasar el cursor sobre todo el footer, 
           se revele la imagen (a un 20% de opacidad, ajusta según necesites).
       */}
-      <div className="absolute inset-0 bg-[url('/images/archdesignlogo.png')]  bg-contain bg-center opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none" />
+      <div className="absolute inset-0  bg-contain bg-center opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none" />
 
       <div className="container relative py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
