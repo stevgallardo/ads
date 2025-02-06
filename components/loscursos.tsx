@@ -17,7 +17,7 @@ const cards = [
   {
     title: "RenderPro",
     description: "Perfecto para arquitectos y diseñadores. Crea renders Profesionales que venden.",
-    image: "/images/hero1.png",
+    image: "/images/hero1.jpg",
     cta: "Ver Curso",
     href: "/cursos/render-pro",
   },
