@@ -62,7 +62,7 @@ export function CourseCTA({ price, originalPrice, discount, includes, videoLink,
           </CardHeader>
           <CardContent>
             <p className="text-center text-muted-foreground">
-              Precio especial por tiempo limitado
+              Precio especial, cupo limitado
             </p>
           </CardContent>
           <CardFooter className="flex flex-col gap-4">
@@ -77,7 +77,7 @@ export function CourseCTA({ price, originalPrice, discount, includes, videoLink,
               VER VIDEO
             </Button>
             <p className="text-center text-sm text-muted-foreground">
-              30 días de garantía de devolución de dinero
+            Asesorías sin costo durante 6 meses.
             </p>
           </CardFooter>
         </Card>

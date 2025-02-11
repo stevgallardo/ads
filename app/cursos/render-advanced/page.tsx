@@ -6,6 +6,9 @@ import { CourseContent } from "@/components/course-content";
 import { CourseCTA } from "@/components/course-cta";
 import { Footer } from "@/components/footer";
 import { DynamicCards } from "@/components/DynamicCards";
+import KuulaEmbed from "@/components/KuulaEmbed";
+
+
 
 export default function RenderAdvancedPage() {
   const courseData = {
@@ -16,7 +19,7 @@ export default function RenderAdvancedPage() {
     originalPrice: 5900,
     discount: 30,
     sessions: "7 SESIONES ONLINE",
-    nextDate: "21 FEB 2025",
+    nextDate: "MARZO 7 2025",
     // Propiedades para cambiar la imagen del hero y el enlace del video desde la página:
     heroImage: "/images/cocina2.png", // Ajusta la ruta según corresponda
     // NUEVA propiedad para cambiar la imagen del contenedor de CourseContent
@@ -104,27 +107,27 @@ export default function RenderAdvancedPage() {
 
   const dynamicCardsData = [
     {
-      title: "8. Vende tus renders",
+      title: "8. Crea vistas 360º ",
       description:
-        "Aprende estrategias para vender tus renders y monetizar tu talento. Descubre técnicas de marketing digital y ventas efectivas.",
-      beforeImage: "/images/venta1.png",
-      afterImage: "/images/venta2.png",
+        "Visualiza espacios en todas direcciones con imágenes envolventes. Explora cada ángulo con una experiencia inmersiva.",
+      beforeImage: "/images/recorrido1.png",
+      afterImage: "/images/recor2.gif",
       buttonText: "Comprar",
     },
     {
-      title: "9. Vende tus renders",
+      title: "9. Crea Recorridos Virtuales",
       description:
-        "Aprende estrategias para vender tus renders y monetizar tu talento. Descubre técnicas de marketing digital y ventas efectivas.",
-      beforeImage: "/images/venta1.png",
-      afterImage: "/images/venta2.png",
+        "Camina por un espacio digital como si estuvieras ahí. Ideal para bienes raíces, arquitectura e interiorismo.",
+      beforeImage: "/images/videorec1.png",
+      afterImage: "/images/videorec2.gif",
       buttonText: "Comprar",
     },
     {
-      title: "10. Vende tus renders",
+      title: "10. Recorrido virtual en página web",
       description:
-        "Aprende estrategias para vender tus renders y monetizar tu talento. Descubre técnicas de marketing digital y ventas efectivas.",
-      beforeImage: "/images/venta1.png",
-      afterImage: "/images/venta2.png",
+        "Integra la experiencia 3D en tu sitio web. Permite a los usuarios explorar sin descargar apps.",
+      beforeImage: "recorrido1.png",
+      afterImage: "recor2.gif",
       buttonText: "Comprar",
     },
     {
@@ -183,6 +186,7 @@ export default function RenderAdvancedPage() {
         afterImage: "/images/venta2.png",
         buttonText: "Comprar",
       },
+      
   ];
 
   // Enlace de comprar para esta página:
@@ -217,8 +221,14 @@ export default function RenderAdvancedPage() {
         <section className="container mx-auto py-16">
           <DynamicCards cards={dynamicCardsData} buyLink={buyLink} />
         </section>
+        Recorrido 360 de ejemplo creado por @entretempos
+    <main>
+      <h2 className="text-3xl font-bold text-center my-6">Recorrido Virtual 360º</h2>
+      <KuulaEmbed url="https://kuula.co/share/collection/7cF5g?logo=1&info=1&fs=1&vr=0&zoom=1&autorotate=0.08&audio=0&thumbs=1&alpha=0.60&inst=0" />
+    </main>
       </main>
       <Footer />
+      
     </>
   );
 }

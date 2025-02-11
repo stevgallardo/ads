@@ -60,7 +60,7 @@ export default function CalculatorTabs() {
           width: 100%;
           max-width: 1200px;
           margin: 3rem auto;
-          padding: 1rem;
+          padding: 2rem;
         }
 
         /* Contenedor con padding para evitar que se vea muy pegado */
@@ -123,11 +123,11 @@ export default function CalculatorTabs() {
 
         /* Ajustar el espaciado superior en móviles */
         .spacer {
-          height: 4rem; /* Menos espacio en desktop */
+          height: 1rem; /* Menos espacio en desktop */
         }
 
         /* Ajustes en pantallas pequeñas: Más espacio arriba y pestañas apiladas */
-        @media (max-width: 768px) {
+        @media (max-width: 1000px) {
           .calculator-tabs {
             padding: 0.5rem;
             margin: 5rem auto; /* Más margen arriba */
@@ -149,7 +149,7 @@ export default function CalculatorTabs() {
 
           /* Mayor espacio arriba para que no se vea pegado al header */
           .spacer {
-            height: 8rem;
+            height: rem;
           }
         }
 

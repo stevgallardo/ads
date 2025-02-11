@@ -16,7 +16,7 @@ export default function RenderProPage() {
     originalPrice: 3800,
     discount: 50,
     sessions: "5 SESIONES ONLINE",
-    nextDate: "21 FEB 2025",
+    nextDate: "MARZO 7 2025",
     videoLink: "https://www.youtube.com/embed/852WhF76Qdk?si=xYBsfPFdfemvtSA6",
     // NUEVA propiedad para cambiar la imagen del contenedor de CourseContent
     contentImage: "/images/pcrenderpro.png",

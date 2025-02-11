@@ -23,6 +23,9 @@ export default function Calculator() {
   const [proyecto, setProyecto] = useState("PEQUEÑO");
   const [descuentoPaquete, setDescuentoPaquete] = useState("NO");
 
+  // Estado para controlar la visibilidad de la ventana flotante
+  const [showInfo, setShowInfo] = useState(false);
+
   const calculate = () => {
     const base = parseFloat(costoBase) || 0;
     const vistas = parseInt(cantidadVistas) || 1;
@@ -189,6 +192,58 @@ export default function Calculator() {
     borderRadius: "8px",
     textAlign: "center",
     marginBottom: "2rem",
+  };
+
+  // Estilos para el botón y la ventana flotante (modal)
+  const buttonStyle = {
+    display: "block",
+    margin: "1rem auto",
+    padding: "0.75rem 1.5rem",
+    backgroundColor: "#3498db",
+    color: "#fff",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontSize: "1rem",
+    transition: "background-color 0.3s ease",
+  };
+
+  const modalOverlayStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1000,
+    backdropFilter: "blur(4px)",
+  };
+
+  const modalContentStyle = {
+    backgroundColor: "#fff",
+    color: "#333",
+    padding: "2rem",
+    borderRadius: "10px",
+    maxWidth: "500px",
+    width: "90%",
+    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+    position: "relative",
+    maxHeight: "80vh", // Permite que el contenido tenga un máximo de altura
+    overflowY: "auto", // Se habilita el scroll cuando el contenido exceda la altura
+  };
+
+  const closeButtonStyle = {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    background: "none",
+    border: "none",
+    fontSize: "1.5rem",
+    cursor: "pointer",
+    transition: "color 0.3s ease",
   };
 
   return (
@@ -420,7 +475,102 @@ export default function Calculator() {
         </div>
       </div>
 
-      {/* Estilos con media queries para responsividad */}
+      {/* Botón "Más Información" con efecto hover */}
+      <button
+        className="info-button"
+        onClick={() => setShowInfo(true)}
+        style={buttonStyle}
+      >
+        Más Información
+      </button>
+
+      {/* Ventana emergente (modal) con información de los cálculos */}
+      {showInfo && (
+        <div
+          className="modal-overlay"
+          style={modalOverlayStyle}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowInfo(false);
+          }}
+        >
+          <div className="modal-content" style={modalContentStyle}>
+            <button
+              className="close-button"
+              onClick={() => setShowInfo(false)}
+              style={closeButtonStyle}
+            >
+              &times;
+            </button>
+            <h2>Información de los Cálculos</h2>
+
+<p>
+  <strong>Costo Base:</strong> Es el precio mínimo establecido para la realización de un render. Representa el valor base del trabajo antes de aplicar cualquier ajuste adicional.
+</p>
+
+<p>
+  <strong>Cantidad de Vistas:</strong> Indica el número de renders que se van a realizar en el proyecto.
+</p>
+
+<p>
+  <strong>Modelado:</strong> Determina si el cliente proporciona un modelo 3D o si es necesario crearlo desde cero. Si no se proporciona, implica un mayor trabajo y, por lo tanto, un costo adicional.
+</p>
+
+<p>
+  <strong>Materiales:</strong> Si el modelo 3D ya incluye materiales, no se requiere trabajo adicional. En caso contrario, se añade un costo por la configuración y aplicación de materiales realistas.
+</p>
+
+<p>
+  <strong>Planos:</strong> Si no se proporciona un modelo 3D, es posible que el cliente cuente con planos. Si tampoco hay planos disponibles, se cobrará un costo adicional por el diseño desde cero.
+</p>
+
+<p>
+  <strong>Tipo de Vista:</strong> Define el tipo de imagen que se va a generar, ya que cada vista requiere un nivel de detalle diferente:
+  <ul>
+    <li><strong>Exterior:</strong> Fachadas y vistas exteriores.</li>
+    <li><strong>Interior:</strong> Espacios dentro de una edificación.</li>
+    <li><strong>Vista Aérea:</strong> Perspectivas en altura o tipo dron.</li>
+  </ul>
+</p>
+
+<p>
+  <strong>Urgente:</strong> Si el render se necesita con prioridad, se aplica un costo adicional por entrega rápida. La urgencia se evalúa según la complejidad del proyecto y los tiempos de entrega.
+</p>
+
+<p>
+  <strong>Calidad:</strong> La calidad final del render influye en el precio, ya que mayor resolución requiere más tiempo y recursos:
+  <ul>
+    <li><strong>FHD (1920x1080):</strong> Ideal para redes sociales y presentaciones digitales.</li>
+    <li><strong>4K (3840x2160):</strong> Recomendado para presentaciones de alta calidad.</li>
+    <li><strong>8K (7680x4320):</strong> Óptimo para impresiones y publicidad en gran formato.</li>
+  </ul>
+</p>
+
+<p>
+  <strong>Tipo de Cliente:</strong> El costo varía según el tipo de cliente y el propósito del render:
+  <ul>
+    <li><strong>Personal:</strong> Para estudiantes, familiares o personas sin fines comerciales.</li>
+    <li><strong>Negocio:</strong> Para emprendedores, arquitectos o diseñadores independientes.</li>
+    <li><strong>Corporativo:</strong> Para inmobiliarias, constructoras y desarrolladoras.</li>
+  </ul>
+</p>
+
+<p>
+  <strong>Tipo de Proyecto:</strong> Se ajusta el costo según el tamaño y complejidad del proyecto:
+  <ul>
+    <li><strong>Pequeño:</strong> Casas o departamentos individuales.</li>
+    <li><strong>Mediano:</strong> Edificios o conjuntos habitacionales.</li>
+    <li><strong>Grande:</strong> Desarrollos urbanos o urbanizaciones completas.</li>
+  </ul>
+</p>
+
+<p>
+  <strong>Descuento por Paquete:</strong> Se aplican descuentos según la cantidad de renders solicitados en un solo paquete. Cuantas más vistas se encarguen, mayor será el descuento aplicado.
+</p>
+          </div>
+        </div>
+      )}
+
+      {/* Estilos con media queries para responsividad y mejoras visuales */}
       <style jsx>{`
         .calculator-container {
           width: 90%;
@@ -441,6 +591,31 @@ export default function Calculator() {
           transform: translateY(-50%);
           align-self: flex-start;
         }
+        /* Hover para el botón de "Más Información" */
+        .info-button:hover {
+          background-color:rgb(10,37,56) !important;
+        }
+        /* Estilos para la X de cierre */
+        .close-button {
+          background-color: transparent;
+          border: none;
+          font-size: 4rem;
+          cursor: pointer;
+          transition: color 0.3s ease;
+        }
+        .close-button:hover {
+          color: #e74c3c;
+        }
+        /* Líneas divisorias entre elementos dentro del modal */
+        .modal-content p {
+          border-bottom: 1px solid #ddd;
+          padding-bottom: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .modal-content p:last-child {
+          border-bottom: none;
+        }
+        /* Modal más angosto en versión móvil */
         @media (max-width: 768px) {
           .content-wrapper {
             flex-direction: column;
@@ -451,6 +626,9 @@ export default function Calculator() {
             top: auto;
             transform: none;
             margin-top: 2rem;
+          }
+          .modal-content {
+            max-width: 300px;
           }
         }
       `}</style>

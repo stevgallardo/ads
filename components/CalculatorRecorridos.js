@@ -21,9 +21,12 @@ export default function Calculator() {
   const [calidad, setCalidad] = useState("FHD");
   const [cliente, setCliente] = useState("PERSONAL");
   const [proyecto, setProyecto] = useState("PEQUEÑO");
-  // Se eliminó descuentoPaquete y se agregan nuevos estados:
+  // Nuevos estados para Recorridos:
   const [tiempo, setTiempo] = useState("0-3"); // Opciones: "0-3", "4-8", "9-12"
   const [edicion, setEdicion] = useState("NO");  // Opciones: "NO", "SI"
+
+  // Estado para controlar la visibilidad de la ventana emergente (modal)
+  const [showInfo, setShowInfo] = useState(false);
 
   const calculate = () => {
     const base = parseFloat(costoBase) || 0;
@@ -187,7 +190,6 @@ export default function Calculator() {
     fontWeight: 700,
   };
 
-  // Estilo para el contenedor del título
   const titleBoxStyle = {
     background: "rgba(255, 255, 255, 0.1)",
     padding: "1rem",
@@ -196,13 +198,65 @@ export default function Calculator() {
     marginBottom: "2rem",
   };
 
+  // Estilos para el botón "Más Información" y la ventana emergente (modal)
+  const buttonStyle = {
+    display: "block",
+    margin: "1rem auto",
+    padding: "0.75rem 1.5rem",
+    backgroundColor: "#3498db",
+    color: "#fff",
+    border: "none",
+    borderRadius: "6px",
+    cursor: "pointer",
+    fontSize: "1rem",
+    transition: "background-color 0.3s ease",
+  };
+
+  const modalOverlayStyle = {
+    position: "fixed",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 1000,
+    backdropFilter: "blur(4px)",
+  };
+
+  const modalContentStyle = {
+    backgroundColor: "#fff",
+    color: "#333",
+    padding: "2rem",
+    borderRadius: "10px",
+    maxWidth: "500px",
+    width: "90%",
+    boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+    position: "relative",
+    maxHeight: "80vh", // Limita la altura y permite scroll
+    overflowY: "auto",
+  };
+
+  const closeButtonStyle = {
+    position: "absolute",
+    top: "10px",
+    right: "10px",
+    background: "none",
+    border: "none",
+    fontSize: "1.5rem",
+    cursor: "pointer",
+    transition: "color 0.3s ease",
+  };
+
   return (
     <div className={`${poppins.className} calculator-container`} style={containerStyle}>
-      {/* Título dentro de una caja */}
+      {/* Título */}
       <div style={titleBoxStyle}>
         <h1 style={{ margin: 0, fontSize: "2rem" }}>Calculadora de Recorridos</h1>
       </div>
-      {/* Contenedor que agrupa el formulario y el resumen */}
+      {/* Contenedor principal */}
       <div className="content-wrapper">
         <div className="form-container">
           <form>
@@ -221,7 +275,6 @@ export default function Calculator() {
                 <span>Base: $ {parseFloat(costoBase).toFixed(2)}</span>
               </div>
             </div>
-
             {/* Cantidad de Videos */}
             <div className="formRow" style={formRowStyle}>
               <div style={inputContainerStyle}>
@@ -237,8 +290,7 @@ export default function Calculator() {
                 <span>Videos: {cantidadVistas}</span>
               </div>
             </div>
-
-            {/* Se te proporcionó modelado */}
+            {/* Modelado */}
             <div className="formRow" style={formRowStyle}>
               <div style={inputContainerStyle}>
                 <label style={labelStyle}>¿Se te proporcionó modelado?</label>
@@ -252,8 +304,7 @@ export default function Calculator() {
                 </select>
               </div>
             </div>
-
-            {/* Si se proporcionó modelado, muestra el selector de materiales */}
+            {/* Materiales (si modelado es SI) */}
             {modelado === "SI" && (
               <div className="formRow" style={formRowStyle}>
                 <div style={inputContainerStyle}>
@@ -272,8 +323,7 @@ export default function Calculator() {
                 </div>
               </div>
             )}
-
-            {/* Si NO se proporcionó modelado, muestra selectores de planos y tipo de vista */}
+            {/* Planos y Tipo de Vista (si modelado es NO) */}
             {modelado === "NO" && (
               <>
                 <div className="formRow" style={formRowStyle}>
@@ -312,8 +362,7 @@ export default function Calculator() {
                 </div>
               </>
             )}
-
-            {/* Campo: ¿Es urgente? */}
+            {/* Urgencia */}
             <div className="formRow" style={formRowStyle}>
               <div style={inputContainerStyle}>
                 <label style={labelStyle}>¿Es urgente?</label>
@@ -330,8 +379,7 @@ export default function Calculator() {
                 <span>+ $ {results.costUrgente.toFixed(2)}</span>
               </div>
             </div>
-
-            {/* Campo: Calidad */}
+            {/* Calidad */}
             <div className="formRow" style={formRowStyle}>
               <div style={inputContainerStyle}>
                 <label style={labelStyle}>Calidad:</label>
@@ -348,8 +396,7 @@ export default function Calculator() {
                 <span>+ $ {results.costCalidad.toFixed(2)}</span>
               </div>
             </div>
-
-            {/* Campo: Tipo de Cliente */}
+            {/* Tipo de Cliente */}
             <div className="formRow" style={formRowStyle}>
               <div style={inputContainerStyle}>
                 <label style={labelStyle}>Tipo de Cliente:</label>
@@ -367,8 +414,7 @@ export default function Calculator() {
                 <span>+ $ {results.costCliente.toFixed(2)}</span>
               </div>
             </div>
-
-            {/* Campo: Tipo de Proyecto */}
+            {/* Tipo de Proyecto */}
             <div className="formRow" style={formRowStyle}>
               <div style={inputContainerStyle}>
                 <label style={labelStyle}>Tipo de Proyecto:</label>
@@ -386,8 +432,7 @@ export default function Calculator() {
                 <span>+ $ {results.costProyecto.toFixed(2)}</span>
               </div>
             </div>
-
-            {/* Campo: TIEMPO (SEGUNDOS) */}
+            {/* Tiempo */}
             <div className="formRow" style={formRowStyle}>
               <div style={inputContainerStyle}>
                 <label style={labelStyle}>Tiempo (segundos):</label>
@@ -411,8 +456,7 @@ export default function Calculator() {
                 </span>
               </div>
             </div>
-
-            {/* Campo: EDICIÓN */}
+            {/* Edición */}
             <div className="formRow" style={formRowStyle}>
               <div style={inputContainerStyle}>
                 <label style={labelStyle}>Edición:</label>
@@ -431,7 +475,7 @@ export default function Calculator() {
             </div>
           </form>
         </div>
-        {/* Contenedor del resumen */}
+        {/* Resumen */}
         <div className="summary-container" style={summaryStyle}>
           <h2 style={summaryHeadingStyle}>Resumen</h2>
           <p style={summaryTextStyle}>
@@ -450,9 +494,7 @@ export default function Calculator() {
           </p>
           <p style={summaryTextStyle}>
             <span style={summaryLabelStyle}>Multiplicador Edición:</span>
-            <strong style={summaryValueStyle}>
-              x {edicion === "SI" ? "1.20" : "1.00"}
-            </strong>
+            <strong style={summaryValueStyle}>x {edicion === "SI" ? "1.20" : "1.00"}</strong>
           </p>
           <p style={summaryTextStyle}>
             <span style={summaryLabelStyle}>Total Final:</span>
@@ -461,7 +503,98 @@ export default function Calculator() {
         </div>
       </div>
 
-      {/* Estilos con media queries para responsividad */}
+      {/* Botón "Más Información" con efecto hover */}
+      <button
+        className="info-button"
+        onClick={() => setShowInfo(true)}
+        style={buttonStyle}
+      >
+        Más Información
+      </button>
+
+      {/* Ventana emergente (modal) con información de los cálculos */}
+      {showInfo && (
+        <div
+          className="modal-overlay"
+          style={modalOverlayStyle}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowInfo(false);
+          }}
+        >
+          <div className="modal-content" style={modalContentStyle}>
+            <button
+              className="close-button"
+              onClick={() => setShowInfo(false)}
+              style={closeButtonStyle}
+            >
+              &times;
+            </button>
+            <h2>Información de los Cálculos</h2>
+            <p>
+  <strong>Costo Base:</strong> Es el precio mínimo establecido para la realización de un clip. Representa el valor base del trabajo antes de aplicar cualquier ajuste adicional.
+</p>
+
+<p>
+  <strong>Cantidad de Videos:</strong> Indica el número de clips que se van a realizar en el proyecto.
+</p>
+
+<p>
+  <strong>Modelado:</strong> Determina si el cliente proporciona un modelo 3D o si es necesario crearlo desde cero. Si no se proporciona, implica un mayor trabajo y, por lo tanto, un costo adicional.
+</p>
+
+<p>
+  <strong>Materiales:</strong> Si el modelo 3D ya incluye materiales, no se requiere trabajo adicional. En caso contrario, se añade un costo por la configuración y aplicación de materiales realistas.
+</p>
+
+<p>
+  <strong>Planos:</strong> Si no se proporciona un modelo 3D, es posible que el cliente cuente con planos. Si tampoco hay planos disponibles, se cobrará un costo adicional por el diseño desde cero.
+</p>
+
+<p>
+  <strong>Tipo de Vista:</strong> Define el tipo de imagen que se va a generar, ya que cada vista requiere un nivel de detalle diferente:
+  <ul>
+    <li><strong>Exterior:</strong> Fachadas y vistas exteriores.</li>
+    <li><strong>Interior:</strong> Espacios dentro de una edificación.</li>
+    <li><strong>Vista Aérea:</strong> Perspectivas en altura o tipo dron.</li>
+  </ul>
+</p>
+
+<p>
+  <strong>Urgente:</strong> Si el render se necesita con prioridad, se aplica un costo adicional por entrega rápida. La urgencia se evalúa según la complejidad del proyecto y los tiempos de entrega.
+</p>
+
+<p>
+  <strong>Calidad:</strong> La calidad final del render influye en el precio, ya que mayor resolución requiere más tiempo y recursos:
+  <ul>
+    <li><strong>FHD (1920x1080):</strong> Ideal para redes sociales y presentaciones digitales.</li>
+    <li><strong>4K (3840x2160):</strong> Recomendado para presentaciones de alta calidad.</li>
+  </ul>
+</p>
+
+<p>
+  <strong>Tipo de Cliente:</strong> El costo varía según el tipo de cliente y el propósito del render:
+  <ul>
+    <li><strong>Personal:</strong> Para estudiantes, familiares o personas sin fines comerciales.</li>
+    <li><strong>Negocio:</strong> Para emprendedores, arquitectos o diseñadores independientes.</li>
+    <li><strong>Corporativo:</strong> Para inmobiliarias, constructoras y desarrolladoras.</li>
+  </ul>
+</p>
+
+<p>
+  <strong>Tipo de Proyecto:</strong> Se ajusta el costo según el tamaño y complejidad del proyecto:
+  <ul>
+    <li><strong>Pequeño:</strong> Casas o departamentos individuales.</li>
+    <li><strong>Mediano:</strong> Edificios o conjuntos habitacionales.</li>
+    <li><strong>Grande:</strong> Desarrollos urbanos o urbanizaciones completas.</li>
+  </ul>
+</p>
+            <p><strong>Tiempo (segundos):</strong> Incremento porcentual basado en la duración de los clips.</p>
+            <p><strong>Edición:</strong> Multiplicador que se aplica si se requiere edición.</p>
+          </div>
+        </div>
+      )}
+
+      {/* Estilos con media queries para responsividad y mejoras visuales */}
       <style jsx>{`
         .calculator-container {
           width: 90%;
@@ -482,6 +615,30 @@ export default function Calculator() {
           transform: translateY(-50%);
           align-self: flex-start;
         }
+        /* Hover para el botón "Más Información" */
+        .info-button:hover {
+          background-color: rgb(10,37,56) !important;
+        }
+        /* Estilos para la X de cierre */
+        .close-button {
+          background-color: transparent;
+          border: none;
+          font-size: 1.5rem;
+          cursor: pointer;
+          transition: color 0.3s ease;
+        }
+        .close-button:hover {
+          color: #e74c3c;
+        }
+        /* Líneas divisorias entre párrafos en el modal */
+        .modal-content p {
+          border-bottom: 1px solid #ddd;
+          padding-bottom: 0.5rem;
+          margin-bottom: 0.5rem;
+        }
+        .modal-content p:last-child {
+          border-bottom: none;
+        }
         @media (max-width: 768px) {
           .content-wrapper {
             flex-direction: column;
@@ -492,6 +649,9 @@ export default function Calculator() {
             top: auto;
             transform: none;
             margin-top: 2rem;
+          }
+          .modal-content {
+            max-width: 300px;
           }
         }
       `}</style>
