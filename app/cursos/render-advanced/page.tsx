@@ -126,8 +126,8 @@ export default function RenderAdvancedPage() {
       title: "10. Recorrido virtual en página web",
       description:
         "Integra la experiencia 3D en tu sitio web. Permite a los usuarios explorar sin descargar apps.",
-      beforeImage: "recorrido1.png",
-      afterImage: "recor2.gif",
+      beforeImage: "/images/recorrido1.png",
+      afterImage: "/images/recor2.gif",
       buttonText: "Comprar",
     },
     {
