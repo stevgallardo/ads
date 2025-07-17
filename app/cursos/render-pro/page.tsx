@@ -15,7 +15,7 @@ export default function RenderProPage() {
     price: 1900,
     originalPrice: 3800,
     discount: 50,
-    sessions: "5 SESIONES ONLINE",
+    sessions: "100 horas de clases grabadas",
     nextDate: "MARZO 7 2025",
     videoLink: "https://www.youtube.com/embed/852WhF76Qdk?si=xYBsfPFdfemvtSA6",
     // NUEVA propiedad para cambiar la imagen del contenedor de CourseContent
